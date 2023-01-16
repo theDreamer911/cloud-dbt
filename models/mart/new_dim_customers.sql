@@ -1,23 +1,12 @@
+{{ config(materialized='table') }}
+
 WITH CUSTOMERS AS (
-
-    SELECT
-        "ID" AS CUSTOMER_ID,
-        "FIRST_NAME",
-        "LAST_NAME"
-
-    FROM RAW_DATA.CUSTOMERS
-
+    select * from {{ ref('stg_customers') }}
 ),
 
 ORDERS AS (
 
-    SELECT
-        "ID" AS ORDER_ID,
-        "USER_ID" AS CUSTOMER_ID,
-        "ORDER_DATE",
-        "STATUS"
-
-    FROM RAW_DATA.ORDERS
+    select * from {{ ref('stg_orders') }}
 
 ),
 
